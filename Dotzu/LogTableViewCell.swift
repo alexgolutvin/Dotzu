@@ -15,7 +15,7 @@ class LogTableViewCell: UITableViewCell, LogCellProtocol {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        labelContent.isUserInteractionEnabled = false
         viewTypeLogColor.layer.cornerRadius = 3
     }
 

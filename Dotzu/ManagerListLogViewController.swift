@@ -186,6 +186,9 @@ extension ManagerListLogViewController: UIScrollViewDelegate {
 extension ManagerListLogViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if state == .logs {
+            let cell = tableView.cellForRow(at: indexPath) as? LogTableViewCell
+            let pasteboard = UIPasteboard.general
+            pasteboard.string = cell?.labelContent?.attributedText.string;
             return
         }
         guard let LogRequest = dataSourceNetwork[indexPath.row] else {return}
