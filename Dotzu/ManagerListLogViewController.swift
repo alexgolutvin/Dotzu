@@ -20,7 +20,7 @@ class ManagerListLogViewController: UIViewController {
         }
     }
 
-    private let dataSourceLogs = ListLogDataSource<Log>()
+    fileprivate let dataSourceLogs = ListLogDataSource<Log>()
     fileprivate let dataSourceNetwork = ListLogDataSource<LogRequest>()
 
     private var firstLaunch = true
@@ -186,9 +186,10 @@ extension ManagerListLogViewController: UIScrollViewDelegate {
 extension ManagerListLogViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if state == .logs {
-            let cell = tableView.cellForRow(at: indexPath) as? LogTableViewCell
+            guard let log = dataSourceLogs[indexPath.row] else {return}
+            let format = LoggerFormat.format(log: log)
             let pasteboard = UIPasteboard.general
-            pasteboard.string = cell?.labelContent?.attributedText.string;
+            pasteboard.string = format.attr.string
             return
         }
         guard let LogRequest = dataSourceNetwork[indexPath.row] else {return}
