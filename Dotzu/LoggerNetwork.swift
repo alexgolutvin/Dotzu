@@ -15,7 +15,7 @@ extension NSMutableURLRequest {
     @objc class func httpBodyHackSwizzle() {
         let setHttpBody = class_getInstanceMethod(self, #selector(setter: NSMutableURLRequest.httpBody))
         let httpBodyHackSetHttpBody = class_getInstanceMethod(self, #selector(self.httpBodyHackSetHttpBody(body:)))
-        method_exchangeImplementations(setHttpBody, httpBodyHackSetHttpBody)
+        method_exchangeImplementations(setHttpBody!, httpBodyHackSetHttpBody!)
     }
 
     @objc func httpBodyHackSetHttpBody(body: NSData?) {
